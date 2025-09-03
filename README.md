@@ -45,7 +45,8 @@ image-preprocessing-lib = "*"
 from preprocessing import convert_and_preprocess_document
 
 # Preprocess a PDF or image file
-processed_pages = convert_and_preprocess_document("document.pdf", method="otsu")
+converted_pages = documents_to_images_conversion("document.pdf", <PDF_CONVERSION_ENDPOINT>)
+processed_pages = do_images_preprocesing(converted_pages, method="otsu")
 # processed_pages is a list of bytes, each representing a preprocessed image page
 ```
 
@@ -59,8 +60,8 @@ show_as_image(processed_pages[0], title="First Page", w=600)
 
 ## API Overview
 
-- `convert_and_preprocess_document(file, method="otsu", ...)`  
-  Convert a document (PDF/image) to preprocessed image bytes for each page.
+- `documents_to_images_conversion(document, pdf_conversion_endpoint:str)`  
+  Convert document to a list of image bytes in parallel.
 
 - `do_images_preprocesing(raw_images, method="threshold", ...)`  
   Preprocess a list of image bytes in parallel.
@@ -73,7 +74,7 @@ show_as_image(processed_pages[0], title="First Page", w=600)
 
 ## License
 
-MIT License
+This is private property of Granton company.
 
 ## Author
 

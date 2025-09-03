@@ -1,0 +1,28 @@
+[project]
+name = "imgproclib"
+version = "0.1.2"
+description = "A library for advanced image preprocessing and visualization for document analysis and OCR workflows."
+authors = [
+    { name = "Granton s.r.o.", email = "info@granton.cz" }
+]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy >=1.22",
+    "opencv-python >=4.5",
+    "Pillow >=9.0",
+    "GrtUtils",
+    "MimeDetector",
+    "ipython >=7.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/granton/image-processing-lib"
+
+[tool.setuptools]
+packages = ["imgproclib"]
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -313,7 +313,7 @@ def _smart_grayscale(bgr: np.ndarray) -> np.ndarray:
 def convert_to_bw(
     img: np.ndarray,
     method: str = "safe_for_ocr",
-    threshold: int = 127,
+    threshold: int = 50,
     max_value: int = 255,
     adaptive_block_size: int = 51,
     adaptive_C: int = 2,
@@ -368,7 +368,7 @@ def convert_to_bw(
     gray = _unsharp(gray, sigma=1.0, amount=0.7)
 
     if method == "safe_for_ocr":
-        return gray
+        return gray0
 
     thresh_flag = cv2.THRESH_BINARY_INV if invert else cv2.THRESH_BINARY
 

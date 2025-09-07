@@ -348,6 +348,13 @@ def convert_to_bw(
     """
     if not isinstance(img, np.ndarray):
         raise ValueError("Input must be a numpy ndarray.")
+    """
+    if method == "safe_for_ocr":
+        # return basic grayscale for OCR - no enchancements
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) if img.ndim == 3 else img
+        return gray
+    """
+    
     if img.ndim == 2:
         gray0 = img.copy()
         bgr = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
@@ -356,6 +363,9 @@ def convert_to_bw(
         if suppress_highlighter:
             bgr = suppress_highlighter_hsv(bgr)
         gray0 = _smart_grayscale(bgr)
+        
+    if method == "safe_for_ocr":
+        return gray0
 
     #gray = _deskew(gray0)  # Deskewing can be enabled if needed
     gray = _bg_normalize_median(gray0)
@@ -365,10 +375,7 @@ def convert_to_bw(
         gray = _apply_clahe(gray, clip=2.0, tile=8)
     gray = _auto_gamma_for_bg(gray, target_bg=245)
     gray = _denoise_bilateral(gray)
-    gray = _unsharp(gray, sigma=1.0, amount=0.7)
-
-    if method == "safe_for_ocr":
-        return gray0
+    gray = _unsharp(gray, sigma=1.0, amount=0.7)      
 
     thresh_flag = cv2.THRESH_BINARY_INV if invert else cv2.THRESH_BINARY
 

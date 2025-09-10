@@ -537,11 +537,11 @@ def _preprocess_image_bytes(
     except Exception as e:
         raise Exception(f"Failed to preprocess image bytes: {e}") from e
 
-def do_images_preprocesing(
+def do_images_preprocessing(
     raw_images: List[bytes],
     img_format: str = "PNG",
     method: str = "safe_for_ocr",
-    threshold: int = 200,
+    threshold: int = 50,
     angle: Optional[float] = None,
     hide_h_line: bool = False,
     hide_v_lines: bool = False,

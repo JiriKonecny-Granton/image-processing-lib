@@ -354,6 +354,12 @@ def convert_to_bw(
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) if img.ndim == 3 else img
         return gray
     """
+    if method == None:
+        print("(!) No binarization method specified, returning original image.")
+        return img
+    
+    if method not in ("safe_for_ocr", "threshold", "otsu", "adaptive", "blackhat", "sauvola"):
+        raise ValueError("Unsupported method. Use 'safe_for_ocr', 'threshold', 'otsu', 'adaptive', 'blackhat', or 'sauvola'.")
     
     if img.ndim == 2:
         gray0 = img.copy()
